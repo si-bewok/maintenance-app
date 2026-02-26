@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="/src/assets/img/logo-small.png" />
+        <title>Daftar Alkes | e-Maintenance</title>
+    </head>
+
+    <body class="bg-gray-100 min-h-screen">
+        <!-- HEADER -->
+        <header class="bg-white shadow-sm sticky top-0 z-40">
+            <div class="flex items-center justify-between px-4 py-3">
+                <!-- Back Button -->
+                <a href="/index.html" class="text-gray-600 hover:text-primary transition"> ← </a>
+
+                <!-- Title -->
+                <h1 class="font-semibold text-lg">Daftar Alat Kesehatan</h1>
+
+                <!-- Search Button -->
+                <button class="text-gray-600 hover:text-primary transition">🔍</button>
+            </div>
+
+            <!-- Tabs Filter -->
+            <div class="flex gap-2 px-4 pb-3 overflow-x-auto">
+                <button class="px-4 py-1 text-sm rounded-full bg-primary text-white whitespace-nowrap">New / Recent</button>
+                <button class="px-4 py-1 text-sm rounded-full bg-gray-200 text-gray-700 whitespace-nowrap">Status Baik</button>
+                <button class="px-4 py-1 text-sm rounded-full bg-gray-200 text-gray-700 whitespace-nowrap">Status Rusak</button>
+            </div>
+        </header>
+
+        <!-- LIST CONTENT -->
+        <main class="p-4 space-y-3">
+            <!-- Tool Item -->
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-4 active:scale-[0.98] transition">
+                <!-- Foto -->
+                <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0">
+                    <img id="alatImg" alt="Tool" class="w-full h-full object-cover" />
+                </div>
+
+                <!-- Info -->
+                <div class="flex-1">
+                    <h2 class="font-medium text-gray-800">Infusion Pump</h2>
+                    <p class="text-sm text-gray-500">B. Braun</p>
+                    <p class="text-xs text-gray-400 mt-1">Ruang ICU Lt.2</p>
+                </div>
+
+                <!-- Status -->
+                <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-600 font-medium"> Baik </span>
+            </div>
+
+            <!-- Tool Item (Rusak) -->
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0">
+                    <img src="/assets/img/sample-tool.jpg" alt="Tool" class="w-full h-full object-cover" />
+                </div>
+
+                <div class="flex-1">
+                    <h2 class="font-medium text-gray-800">Ventilator</h2>
+                    <p class="text-sm text-gray-500">Philips</p>
+                    <p class="text-xs text-gray-400 mt-1">Ruang OK 1</p>
+                </div>
+
+                <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600 font-medium"> Rusak </span>
+            </div>
+        </main>
+
+        <!-- FLOATING QR BUTTON -->
+        <button class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center active:scale-90 transition">📷</button>
+
+        <script type="module" src="/src/js/modules/tool-list.js"></script>
+    </body>
+</html>
