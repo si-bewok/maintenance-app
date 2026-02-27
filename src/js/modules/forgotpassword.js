@@ -4,6 +4,7 @@ import { showOrHideError, showToast } from "./helper.js";
 
 const form = document.getElementById("forgotForm");
 const emailInput = document.getElementById("email");
+const emailError = document.getElementById("emailError");
 const toast = document.getElementById("toast");
 
 form.addEventListener("submit", async (e) => {
@@ -13,7 +14,7 @@ form.addEventListener("submit", async (e) => {
 
     showOrHideError(false, [emailError], [emailInput]);
 
-    if (!emailInput.value.includes("@")) {
+    if (!emailInput.value || !emailInput.checkValidity()) {
         showOrHideError(true, [emailError], [emailInput]);
         valid = false;
     }

@@ -7,66 +7,71 @@
         <title>Daftar Alkes | e-Maintenance</title>
     </head>
 
-    <body class="bg-gray-100 min-h-screen">
+    <body class="bg-gray-100 min-h-screen overflow-x-hidden">
         <!-- HEADER -->
         <header class="bg-white shadow-sm sticky top-0 z-40">
             <div class="flex items-center justify-between px-4 py-3">
                 <!-- Back Button -->
-                <a href="/index.html" class="text-gray-600 hover:text-primary transition"> ← </a>
+                <a href="/index.html" class="text-secondary hover:text-secondary/80 active:text-secondary/60 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
 
                 <!-- Title -->
-                <h1 class="font-semibold text-lg">Daftar Alat Kesehatan</h1>
+                <h1 class="font-semibold text-lg text-secondary">Daftar Alat Kesehatan</h1>
 
-                <!-- Search Button -->
-                <button class="text-gray-600 hover:text-primary transition">🔍</button>
+                <!-- Toggle Button -->
+                <button id="searchToggle" type="button" class="text-secondary bg-white hover:bg-white/80 active:bg-white/60 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" stroke-linecap="round" stroke-linejoin="round" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 20l-3.5-3.5" />
+                    </svg>
+                </button>
             </div>
 
-            <!-- Tabs Filter -->
-            <div class="flex gap-2 px-4 pb-3 overflow-x-auto">
-                <button class="px-4 py-1 text-sm rounded-full bg-primary text-white whitespace-nowrap">New / Recent</button>
-                <button class="px-4 py-1 text-sm rounded-full bg-gray-200 text-gray-700 whitespace-nowrap">Status Baik</button>
-                <button class="px-4 py-1 text-sm rounded-full bg-gray-200 text-gray-700 whitespace-nowrap">Status Rusak</button>
+            <!-- 🔍 SEARCH FORM (NEW POSITION) -->
+            <div id="searchWrapper" class="px-3 py-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
+                <form id="searchForm" class="flex items-center gap-2 pb-2">
+                    <input id="searchInput" type="text" name="query" placeholder="Cari alat..." class="flex-1 px-3 py-2 text-sm text-secondary rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+                    <button type="submit" class="text-sm bg-primary hover:bg-primary/80 active:bg-primary/60 text-white px-4 py-2 rounded-lg">Cari</button>
+                </form>
+            </div>
+
+            <!-- Tabs Container -->
+            <div class="relative bg-white">
+                <div id="tabs" class="flex text-sm font-medium text-secondary">
+                    <button class="tab-item flex-1 py-3 text-center text-primary">Semua</button>
+                    <button class="tab-item flex-1 py-3 text-center">Terbaru</button>
+                    <button class="tab-item flex-1 py-3 text-center">Status Baik</button>
+                    <button class="tab-item flex-1 py-3 text-center">Status Rusak</button>
+                </div>
+
+                <!-- Sliding Underline -->
+                <span id="tab-indicator" class="absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 ease-out"> </span>
             </div>
         </header>
 
         <!-- LIST CONTENT -->
-        <main class="p-4 space-y-3">
-            <!-- Tool Item -->
-            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-4 active:scale-[0.98] transition">
-                <!-- Foto -->
-                <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0">
-                    <img id="alatImg" alt="Tool" class="w-full h-full object-cover" />
-                </div>
-
-                <!-- Info -->
-                <div class="flex-1">
-                    <h2 class="font-medium text-gray-800">Infusion Pump</h2>
-                    <p class="text-sm text-gray-500">B. Braun</p>
-                    <p class="text-xs text-gray-400 mt-1">Ruang ICU Lt.2</p>
-                </div>
-
-                <!-- Status -->
-                <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-600 font-medium"> Baik </span>
-            </div>
-
-            <!-- Tool Item (Rusak) -->
-            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-4">
-                <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0">
-                    <img src="/assets/img/sample-tool.jpg" alt="Tool" class="w-full h-full object-cover" />
-                </div>
-
-                <div class="flex-1">
-                    <h2 class="font-medium text-gray-800">Ventilator</h2>
-                    <p class="text-sm text-gray-500">Philips</p>
-                    <p class="text-xs text-gray-400 mt-1">Ruang OK 1</p>
-                </div>
-
-                <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600 font-medium"> Rusak </span>
-            </div>
+        <main id="toolList" class="w-full p-2 space-y-1">
+            <!-- Render via JS -->
         </main>
 
+        <div id="scrollSentinel" class="h-10"></div>
+
         <!-- FLOATING QR BUTTON -->
-        <button class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center active:scale-90 transition">📷</button>
+        <button class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary hover:bg-primary/80 active:bg-primary/60 text-white shadow-lg flex items-center justify-center active:scale-90 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 4h4v4H4zM16 4h4v4h-4z
+                        M4 16h4v4H4zM16 16h4v4h-4z
+                        M9 9h6v6H9z"
+                />
+            </svg>
+        </button>
 
         <script type="module" src="/src/js/modules/tool-list.js"></script>
     </body>

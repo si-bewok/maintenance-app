@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-    --color-mapbrown: #ca9247;
-    --color-mapgrey: #3d3d3f;
+    --color-primary: #ca9247;
+    --color-secondary: #3d3d3f;
 }
 
 :root {

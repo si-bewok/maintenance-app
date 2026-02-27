@@ -19,7 +19,7 @@ form.addEventListener("submit", (e) => {
 
     showOrHideError(false, [emailError, passwordError], [emailInput, passwordInput]);
 
-    if (!emailInput.value.includes("@")) {
+    if (!emailInput.value || !emailInput.checkValidity()) {
         showOrHideError(true, [emailError], [emailInput]);
         valid = false;
     }
