@@ -1,5 +1,6 @@
 import "@/css/style.css";
 import img from "@/assets/img/gasmedis_square.jpg";
+import { initLogoutModal } from "./logout";
 
 // Dummy Data
 const baseTools = [
@@ -65,6 +66,7 @@ const observer = new IntersectionObserver(
 );
 
 window.addEventListener("DOMContentLoaded", () => {
+    initLogoutModal();
     loadMore(); // initial load
     observer.observe(sentinel);
 });
@@ -115,15 +117,15 @@ function createCard(tool) {
     const card = document.createElement("a");
     card.href = `/tool-detail.html?id=${tool.id}`;
     card.className = `
-    grid grid-cols-[64px_minmax(0,1fr)_60px_60px]
-    items-center gap-3 p-3
+    grid grid-cols-[55px_minmax(0,1fr)_60px_60px]
+    items-center gap-2 p-3
     bg-white rounded-lg shadow-sm
     hover:shadow-md transition duration-200
     `;
 
     card.innerHTML = `
     <img src="${tool.image}"
-         class="w-16 h-16 object-cover rounded-xl bg-gray-100"
+         class="w-14 h-14 object-cover rounded-xl bg-gray-100"
          alt="${tool.name}" />
 
     <div class="min-w-0">

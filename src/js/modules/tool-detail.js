@@ -1,5 +1,6 @@
 import "@/css/style.css";
 import { showToast } from "./helper.js";
+import { initLogoutModal } from "./logout.js";
 // import { db } from "../firebase/config.js";
 // import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
 
@@ -16,7 +17,6 @@ const kunjunganList = document.getElementById("kunjunganList");
 const sentinel = document.getElementById("kunjunganSentinel");
 
 // Form fields
-const toolForm = document.getElementById("toolForm");
 const fieldNamaAlat = document.getElementById("fieldNamaAlat");
 const fieldMerk = document.getElementById("fieldMerk");
 const fieldTipe = document.getElementById("fieldTipe");
@@ -50,11 +50,19 @@ const dummyTool = {
     status: "Baik",
 };
 
-const dummyKunjungan = [
-    { id: "k1", date: "2025-01-12", technician: "Budi Santoso", user: "Dr. Siti Rahayu", status: "Selesai" },
-    { id: "k2", date: "2025-02-03", technician: "Ahmad Fauzi", user: "Ns. Dewi Lestari", status: "Menunggu" },
-    { id: "k3", date: "2025-03-15", technician: "Rizky Pratama", user: "Dr. Hendra Gunawan", status: "Selesai" },
+const baseKunjungan = [
+    { id: "1", date: "2025-01-12", technician: "Budi Santoso", user: "Dr. Siti Rahayu", status: "Selesai" },
+    { id: "2", date: "2025-02-03", technician: "Ahmad Fauzi", user: "Ns. Dewi Lestari", status: "Menunggu" },
+    { id: "3", date: "2025-03-15", technician: "Rizky Pratama", user: "Dr. Hendra Gunawan", status: "Selesai" },
 ];
+// simulate 15 items
+const dummyKunjungan = Array.from({ length: 15 }, (_, i) => {
+    const item = baseKunjungan[i % baseKunjungan.length];
+    return {
+        ...item,
+        id: i + 1,
+    };
+});
 
 // =======================
 // TABS
@@ -117,7 +125,11 @@ async function loadToolData() {
 }
 
 function populateForm(tool) {
-    toolNameEl.textContent = tool.name;
+    // Info strip di header
+    toolNameEl.textContent = tool.name ?? "—";
+    document.getElementById("toolMeta").textContent = [tool.brand, tool.type, tool.serialNumber ? `SN ${tool.serialNumber}` : null].filter(Boolean).join(" · ") || "—";
+
+    // Form fields
     fieldNamaAlat.value = tool.name ?? "";
     fieldMerk.value = tool.brand ?? "";
     fieldTipe.value = tool.type ?? "";
@@ -130,9 +142,7 @@ function populateForm(tool) {
 // =======================
 // SAVE DATA ALAT
 // =======================
-toolForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
+saveBtn.addEventListener("click", async () => {
     if (!validateForm()) return;
 
     const updatedData = {
@@ -155,7 +165,10 @@ toolForm.addEventListener("submit", async (e) => {
         // --- Dummy delay (hapus setelah pakai Firestore) ---
         await new Promise((resolve) => setTimeout(resolve, 1200));
 
+        // Update info strip
         toolNameEl.textContent = updatedData.name;
+        document.getElementById("toolMeta").textContent = [updatedData.brand, updatedData.type, updatedData.serialNumber ? `SN ${updatedData.serialNumber}` : null].filter(Boolean).join(" · ") || "—";
+
         showToast(false, toast, "Data alat berhasil disimpan.");
     } catch (error) {
         console.error("Gagal menyimpan data:", error);
@@ -163,10 +176,6 @@ toolForm.addEventListener("submit", async (e) => {
     } finally {
         showLoading(false);
     }
-});
-
-saveBtn.addEventListener("click", async () => {
-    toolForm.requestSubmit();
 });
 
 function validateForm() {
@@ -256,7 +265,7 @@ function loadMoreKunjungan() {
 function createKunjunganCard(kunjungan) {
     const card = document.createElement("a");
     card.href = `/kunjungan-detail.html?id=${kunjungan.id}&toolId=${toolId}`;
-    card.className = "grid grid-cols-[1fr_auto] items-center gap-3 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-200";
+    card.className = "grid grid-cols-[1fr_auto] items-center gap-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-200";
 
     const isSelesai = kunjungan.status === "Selesai";
     const formattedDate = formatDate(kunjungan.date);
@@ -298,6 +307,7 @@ function formatDate(dateStr) {
 // MAIN
 // =======================
 window.addEventListener("DOMContentLoaded", () => {
+    initLogoutModal();
     loadToolData();
     loadKunjunganData();
 });

@@ -4,25 +4,21 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" href="/src/assets/img/logo-small.png" />
-        <title>Daftar Alkes | e-Maintenance</title>
+        <title>Home | e-Maintenance</title>
     </head>
 
     <body class="bg-gray-100 min-h-screen overflow-x-hidden">
         <!-- HEADER -->
         <header class="bg-white shadow-sm sticky top-0 z-40">
             <div class="flex items-center justify-between px-4 py-3">
-                <!-- Back Button -->
-                <a href="/index.html" class="text-secondary hover:text-secondary/80 active:text-secondary/60 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </a>
+                <!-- Logo + App Name (rata kiri) -->
+                <div class="flex items-start gap-2">
+                    <img id="appLogo" src="/src/assets/img/logo-small.png" alt="Logo" class="h-7 w-auto" />
+                    <span class="font-semibold text-base text-secondary">e-Maintenance</span>
+                </div>
 
-                <!-- Title -->
-                <h1 class="font-semibold text-lg text-secondary">Daftar Alat Kesehatan</h1>
-
-                <!-- Toggle Button -->
-                <button id="searchToggle" type="button" class="text-secondary bg-white hover:bg-white/80 active:bg-white/60 transition">
+                <!-- Search Toggle Button (rata kanan) -->
+                <button id="searchToggle" type="button" aria-label="Cari alat" class="text-secondary hover:text-secondary/80 active:text-secondary/60 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7" stroke-linecap="round" stroke-linejoin="round" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20 20l-3.5-3.5" />
@@ -30,26 +26,23 @@
                 </button>
             </div>
 
-            <!-- 🔍 SEARCH FORM (NEW POSITION) -->
+            <!-- Search Form -->
             <div id="searchWrapper" class="px-3 py-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
                 <form id="searchForm" class="flex items-center gap-2 pb-2">
-                    <input id="searchInput" type="text" name="query" placeholder="Cari alat..." class="flex-1 px-3 py-2 text-sm text-secondary rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-
+                    <input id="searchInput" type="text" name="query" placeholder="Cari alat..." class="flex-1 px-3 py-2 text-sm text-secondary rounded-lg outline outline-secondary/40 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <button type="submit" class="text-sm bg-primary hover:bg-primary/80 active:bg-primary/60 text-white px-4 py-2 rounded-lg">Cari</button>
                 </form>
             </div>
 
-            <!-- Tabs Container -->
+            <!-- Tabs -->
             <div class="relative bg-white">
                 <div id="tabs" class="flex text-sm font-medium text-secondary">
                     <button class="tab-item flex-1 py-3 text-center text-primary">Semua</button>
                     <button class="tab-item flex-1 py-3 text-center">Terbaru</button>
-                    <button class="tab-item flex-1 py-3 text-center">Status Baik</button>
-                    <button class="tab-item flex-1 py-3 text-center">Status Rusak</button>
+                    <button class="tab-item flex-1 py-3 text-center">Baik</button>
+                    <button class="tab-item flex-1 py-3 text-center">Rusak</button>
                 </div>
-
-                <!-- Sliding Underline -->
-                <span id="tab-indicator" class="absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 ease-out"> </span>
+                <span id="tab-indicator" class="absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 ease-out"></span>
             </div>
         </header>
 
@@ -58,18 +51,65 @@
             <!-- Render via JS -->
         </main>
 
-        <div id="scrollSentinel" class="h-10"></div>
+        <!-- SENTINEL -->
+        <div id="scrollSentinel"></div>
+        <div class="h-20"></div>
+
+        <!-- BOTTOM NAVBAR -->
+        <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
+            <div class="flex items-center justify-around px-2 py-2">
+                <!-- Logout -->
+                <button type="button" aria-label="Logout" class="flex flex-col items-center gap-1 px-3 py-1 text-gray-400 hover:text-primary/60 active:text-primary/80 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+                    </svg>
+                    <span class="text-[10px] font-medium">Logout</span>
+                </button>
+
+                <!-- Home (active) -->
+                <a href="/tool-lists.html" aria-label="Home" class="flex flex-col items-center gap-1 px-3 py-1 text-primary transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 0 1 1.414 0l9 9A1 1 0 0 1 20 13h-1v7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4h-2v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-7H4a1 1 0 0 1-.707-1.707l9-9z" />
+                    </svg>
+                    <span class="text-[10px] font-medium">Home</span>
+                </a>
+
+                <!-- Add Tools (aksen tengah) -->
+                <a href="/add-tool.html" aria-label="Tambah Alat" class="flex flex-col items-center gap-1 px-3 py-1 transition">
+                    <div class="w-12 h-12 -mt-6 rounded-full bg-primary hover:bg-primary/80 active:bg-primary/60 flex items-center justify-center shadow-lg transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </div>
+                    <span class="text-[10px] font-medium text-primary mt-1">Tambah</span>
+                </a>
+
+                <!-- Export Data -->
+                <a href="/export.html" aria-label="Export Data" class="flex flex-col items-center gap-1 px-3 py-1 text-gray-400 hover:text-primary/60 active:text-primary/80 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+                    </svg>
+                    <span class="text-[10px] font-medium">Export</span>
+                </a>
+
+                <!-- Profil -->
+                <a href="/profil.html" aria-label="Profil" class="flex flex-col items-center gap-1 px-3 py-1 text-gray-400 hover:text-primary/60 active:text-primary/80 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                    </svg>
+                    <span class="text-[10px] font-medium">Profil</span>
+                </a>
+            </div>
+        </nav>
 
         <!-- FLOATING QR BUTTON -->
-        <button class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary hover:bg-primary/80 active:bg-primary/60 text-white shadow-lg flex items-center justify-center active:scale-90 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 4h4v4H4zM16 4h4v4h-4z
-                        M4 16h4v4H4zM16 16h4v4h-4z
-                        M9 9h6v6H9z"
-                />
+        <button aria-label="Scan QR" class="fixed bottom-23 right-4 w-14 h-14 rounded-full bg-primary hover:bg-primary/80 active:bg-primary/60 text-white shadow-lg flex items-center justify-center active:scale-90 transition z-30">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 14h2v2h-2zM18 14h3M14 18v3M18 18h3v3h-3zM18 21v-2" />
             </svg>
         </button>
 

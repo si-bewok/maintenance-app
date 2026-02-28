@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" href="/src/assets/img/logo-small.png" />
-        <title>Detail | e-Maintenance</title>
+        <title>Tambah | e-Maintenance</title>
     </head>
 
     <body class="bg-gray-100 min-h-screen overflow-x-hidden">
@@ -42,15 +42,15 @@
 
             <!-- Info Strip: nama alat + merk · tipe · SN -->
             <div class="px-4 pb-3 border-b border-gray-100">
-                <h1 id="toolName" class="text-base font-semibold text-secondary leading-tight truncate">—</h1>
-                <p id="toolMeta" class="text-xs text-gray-400 mt-0.5 truncate">—</p>
+                <h1 id="toolName" class="text-base font-semibold text-secondary leading-tight truncate">Tambah Alkes</h1>
+                <p id="toolMeta" class="text-xs text-gray-400 mt-0.5 truncate">Isi dan lengkapi data. Tanda (<span class="text-xs text-red-500">*</span>) wajib dilengkapi.</p>
             </div>
 
             <!-- Tabs -->
             <div class="relative bg-white">
                 <div id="tabs" class="flex text-sm font-medium text-secondary">
                     <button class="tab-item flex-1 py-3 text-center text-primary" data-tab="data-alat">Data Alat</button>
-                    <button class="tab-item flex-1 py-3 text-center" data-tab="data-kunjungan">Data Kunjungan</button>
+                    <button disabled class="tab-item flex-1 py-3 text-center" data-tab="data-kunjungan">Data Kunjungan</button>
                 </div>
                 <span id="tab-indicator" class="absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 ease-out"></span>
             </div>
@@ -157,41 +157,6 @@
                     </div>
                 </form>
             </section>
-
-            <!-- ========================== -->
-            <!-- TAB: DATA KUNJUNGAN (LIST) -->
-            <!-- ========================== -->
-            <section id="panel-data-kunjungan" class="tab-panel hidden">
-                <div id="kunjunganList" class="w-full p-2 space-y-1">
-                    <!-- Render via JS -->
-
-                    <!-- Dummy card 1 -->
-                    <a href="#" class="grid grid-cols-[1fr_auto] items-start gap-3 p-4 bg-white border border-y-gray-100 shadow-sm hover:shadow-md transition duration-200">
-                        <div class="space-y-1 min-w-0">
-                            <p class="text-xs text-gray-400">12 Januari 2025</p>
-                            <p class="text-sm font-semibold text-gray-800 truncate">Teknisi: Budi Santoso</p>
-                            <p class="text-sm text-gray-500 truncate">User: Dr. Siti Rahayu</p>
-                        </div>
-                        <div class="flex items-center justify-end pt-1">
-                            <span class="text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap bg-green-100 text-green-600">Selesai</span>
-                        </div>
-                    </a>
-
-                    <!-- Dummy card 2 -->
-                    <a href="#" class="grid grid-cols-[1fr_auto] items-start gap-3 p-4 bg-white border border-y-gray-100 shadow-sm hover:shadow-md transition duration-200">
-                        <div class="space-y-1 min-w-0">
-                            <p class="text-xs text-gray-400">3 Februari 2025</p>
-                            <p class="text-sm font-semibold text-gray-800 truncate">Teknisi: Ahmad Fauzi</p>
-                            <p class="text-sm text-gray-500 truncate">User: Ns. Dewi Lestari</p>
-                        </div>
-                        <div class="flex items-center justify-end pt-1">
-                            <span class="text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap bg-yellow-100 text-yellow-600">Menunggu</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div id="kunjunganSentinel" class="h-10"></div>
-            </section>
         </main>
 
         <!-- BOTTOM NAVBAR -->
@@ -248,6 +213,6 @@
             class="fixed bottom-20 left-1/2 -translate-x-1/2 opacity-0 translate-y-5 pointer-events-none transition-all duration-300 ease-out text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-medium whitespace-nowrap"
         ></div>
 
-        <script type="module" src="/src/js/modules/tool-detail.js"></script>
+        <script type="module" src="/src/js/modules/add-tool.js"></script>
     </body>
 </html>
